@@ -34,7 +34,7 @@ function NavigationBar() {
                 />
             )}
 
-            <nav className="bg-white w-full h-18 sticky z-50 border-b border-gray-200 px-4 md:px-8 py-4">
+            <nav className="bg-white w-full h-18 top-0 sticky z-50 border-b border-gray-200 px-4 md:px-8 py-4">
                 <div className="mx-auto flex justify-between items-center relative z-50">
                     <div className="flex items-center">
                         <Link onClick={closeMobileMenu} to='/' className={location.pathname === "/" ? 'active' : ''}>
@@ -68,7 +68,7 @@ function NavigationBar() {
                     </div>
 
                    <div className="flex gap-2">
-                       <button className="font-sans text-sm md:text-base bg-black text-white font-semibold px-5 py-2 rounded-md">
+                       <button className="font-sans text-sm md:text-base bg-accent hover:bg-accent-light cursor-pointer text-white font-semibold px-5 py-2 rounded-md">
                             Follow
                        </button>
                         <button 

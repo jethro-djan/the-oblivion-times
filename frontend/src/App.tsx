@@ -1,6 +1,4 @@
-import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router';
-import axios from 'axios';
 import NavigationBar from './components/NavigationBar';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';

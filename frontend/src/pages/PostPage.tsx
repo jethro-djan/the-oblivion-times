@@ -9,6 +9,8 @@ const PostPage = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
+    const navigate = useNavigate();
+
     useEffect(() => {
         const fetchpost = async () => {
             if (!slug) {
@@ -50,7 +52,7 @@ const PostPage = () => {
                     {error || 'Post not found'}
                 </div>
                 <button 
-                    onClick={() => useNavigate('/')} 
+                    onClick={() => navigate("/")} 
                     className="text-blue-600 hover:underline"
                 >
                     ← Back to Home
@@ -84,23 +86,5 @@ const PostPage = () => {
         </article>
     );
 };
-
-const EssayHTMLDetail = ({ content }: string) => {
-    return (
-        <div
-            className="font-serif text-xl md:text-lg md:text-lg [&>p]:mb-6 
-                [&>blockquote]:pl-6 [&>blockquote]:py-4 
-                [&>blockquote]:mb-6 [&>blockquote]:border-l-4 
-                [&>blockquote]:italic [&>blockquote]:border-accent 
-                [&>blockquote]:bg-gray-100 
-
-                [&>h3]:text-2xl
-
-                [&>em]:italic"
-            dangerouslySetInnerHTML={{ __html: content }}
-        >
-        </div>
-    );
-}
 
 export default PostPage;
