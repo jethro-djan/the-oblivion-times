@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+:root {
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+    --spacing: 4px;
+    --font-serif: 'Crimson Text', serif;
+    --font-sans: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --color-primary: #1a1a1a;
+    --color-primary-light: #4a5568;
+    --color-border-medium: #cbd5e0;
+    --color-border-light: #e2e8f0;
+    --color-accent: #2c5530;
+    --color-accent-light: #4a7c59;
+
+}

@@ -1,0 +1,17 @@
+# Backend 
+/Backend/bin
+/Backend/obj
+/Backend/appSettings.Development.json
+/Backend/Properties/launchSettings.json
+
+# Frontend
+/frontend/node_modules
+/frontend/package-lock.json
+
+# OS
+/**/.DS_Store
+
+# IDE
+/**/*.swap
+/**/.vscode
+
