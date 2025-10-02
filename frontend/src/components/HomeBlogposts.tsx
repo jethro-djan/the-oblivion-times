@@ -1,7 +1,18 @@
 import { Link } from 'react-router';
 import { type PostSummary } from '../types';
 
+const sortByDate = (a: PostSummary, b: PostSummary) => {
+    const dateA = new Date(a.date);
+    const dateB = new Date(b.date);
+
+    return dateB.getTime() - dateA.getTime();
+}
+
 function HomeBlogposts({ postSummaries }: { postSummaries: PostSummary[] }) {
+    const latestPosts = postSummaries
+        .sort(sortByDate)
+        .slice(0, 4);
+
     return (
         <div className="min-h-screen">
             <section className="px-6 pb-8 max-w-content mx-auto">
@@ -9,7 +20,7 @@ function HomeBlogposts({ postSummaries }: { postSummaries: PostSummary[] }) {
                     Recent Essays
                 </h2>
 
-                {postSummaries.map((postSummary) => (
+                {latestPosts.map((postSummary) => (
                     <Link
                         to={`/essays/${postSummary.slug}`}
                         key={postSummary.id}
