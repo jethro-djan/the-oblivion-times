@@ -45,20 +45,20 @@ function NavigationBar() {
                     <div className="hidden md:flex space-x-8">
                         <ul className="flex space-x-4 font-sans text-primary">
                             <li>
-                                <Link onClick={closeMobileMenu} to='/' className={location.pathname === "/" ? 'active' : ''}>
+                                {/* <Link onClick={closeMobileMenu} to='/' className={location.pathname === "/" ? 'active' : ''}>
                                     Home
-                                </Link>
+                                </Link> */}
                             </li>
                             <li>
                                 <Link onClick={closeMobileMenu} to='/essays' className={location.pathname === "/essays" ? 'active' : ''}>
                                     Essays
                                 </Link>
                             </li>
-                            <li>
+                            {/* <li>
                                 <Link onClick={closeMobileMenu} to='/authors' className={location.pathname === "/authors" ? 'active' : ''}>
                                     Authors
                                 </Link>
-                            </li>
+                            </li> */}
                             <li>
                                 <Link onClick={closeMobileMenu} to='/about' className={location.pathname === "/about" ? 'active' : ''}>
                                     About
@@ -69,7 +69,7 @@ function NavigationBar() {
 
                    <div className="flex gap-2">
                        <button className="font-sans text-sm md:text-base bg-accent hover:bg-accent-light cursor-pointer text-white font-semibold px-5 py-2 rounded-md">
-                            Follow
+                            Join the Dispatch
                        </button>
                         <button 
                             className="md:hidden p-2 transition-transform duration-200" 
