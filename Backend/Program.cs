@@ -1,5 +1,6 @@
 using Markdig;
 using Ganss.Xss;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,6 +32,13 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors("AllowReactApp");
+app.UseStaticFiles();
+// app.UseStaticFiles(new StaticFileOptions 
+// {
+//     FileProvider = new PhysicalFileProvider(
+//         Path.Combine(builder.Environment.ContentRootPath, "assets")),
+//     RequestPath = "/assets"
+// });
 app.UseAuthorization();
 app.MapStaticAssets();
 
@@ -68,6 +76,21 @@ app.MapGet("/api/posts/{slug}", (string slug) =>
     });
 });
 
+app.MapGet("/debug/paths", () => 
+{
+    var contentRoot = builder.Environment.ContentRootPath;
+    var assetsPath = Path.Combine(contentRoot, "assets");
+    var exists = Directory.Exists(assetsPath);
+    
+    return Results.Ok(new
+    {
+        contentRoot,
+        assetsPath,
+        assetsExists = exists,
+        files = exists ? Directory.GetFiles(assetsPath, "*", SearchOption.AllDirectories) : Array.Empty<string>()
+    });
+});
+
 app.Run();
 
 record Post(string Id, string Slug, string Title, string Snippet, string Author, string Category, string Date, string Content);
@@ -101,11 +124,21 @@ class BlogPostService
             .Deserialize<Dictionary<string, object>>(frontmatter);
 
         var pipeline = new MarkdownPipelineBuilder()
-            .DisableHtml()
             .UseAdvancedExtensions()
+            // .DisableHtml()
+            .UsePipeTables()
+            .UseMathematics()
             .Build();
+
+        var htmlContent = Markdown.ToHtml(markdownContent, pipeline);
+
         var sanitiser = new HtmlSanitizer();
-        var htmlContent = sanitiser.Sanitize(Markdown.ToHtml(markdownContent, pipeline));
+        sanitiser.AllowedTags.Add("figure");
+        sanitiser.AllowedTags.Add("figcaption");
+        sanitiser.AllowedAttributes.Add("class");
+        sanitiser.AllowedAttributes.Add("title");
+
+        htmlContent = sanitiser.Sanitize(htmlContent);
 
         // Remove the first 3 entries (which together make a date) to get slug
         var slug = string.Join("-", fileName.Split("-", StringSplitOptions.RemoveEmptyEntries)[3..]);
