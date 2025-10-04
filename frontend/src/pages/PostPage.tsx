@@ -62,7 +62,7 @@ const PostPage = () => {
     }
 
     return (
-        <article className="px-4 px-8 max-w-3xl mx-auto">
+        <article className="px-8 max-w-3xl mx-auto">
             <header className="text-center mb-12">
                 <span
                     className="inline-block font-sans text-sm font-semibold text-accent uppercase tracking-wide mb-4"

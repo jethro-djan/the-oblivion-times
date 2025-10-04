@@ -49,8 +49,8 @@ const EssaysPage = () => {
         <>
             <section className="px-4 py-12">
                 <div className="max-w-6xl mx-auto text-center">
-                    <h1 className="text-3xl md:text-4xl font-semibold mb-4">Essays</h1>
-                    <p className="text-lg text-primary-light max-w-2xl mx-auto">
+                    <h1 className="font-serif text-3xl md:text-4xl font-semibold mb-4">Essays</h1>
+                    <p className="font-serif text-lg text-primary-light max-w-2xl mx-auto">
                         Deep dives and thoughtful explorations across mathematics, software, and philosophy.
                     </p>
                 </div>
@@ -91,10 +91,10 @@ const EssaysPage = () => {
                                             <span className="text-xs font-semibold text-accent uppercase tracking-wide">{postSummary.category}</span>
                                             <span className="text-xs text-primary-light">12 min</span>
                                         </div>
-                                        <h3 className="text-xl font-semibold leading-tight mb-3 flex-grow">
+                                        <h3 className="font-serif text-xl font-semibold leading-tight mb-3 flex-grow">
                                             {postSummary.title} 
                                         </h3>
-                                        <p className="text-base leading-relaxed text-primary-light mb-4 line-clamp-3">
+                                        <p className="font-serif text-base leading-relaxed text-primary-light mb-4 line-clamp-3">
                                             {postSummary.snippet}
                                         </p>
                                         <div className="mt-auto">
