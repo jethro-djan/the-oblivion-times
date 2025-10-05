@@ -1,15 +1,33 @@
-import {useEffect, useState } from 'react';
+import {useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router';
 import axios from 'axios';
 import { type Post } from '../types';
+import renderMathInElement from 'katex/dist/contrib/auto-render';
+import 'katex/dist/katex.min.css';
 
 const PostPage = () => {
     const { slug } = useParams<{ slug: string }>();
     const [post, setPost] = useState<Post | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const contentRef = useRef<HTMLDivElement>(null);
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (contentRef.current && post?.content) {
+            renderMathInElement(contentRef.current, {
+                delimiters: [
+                    { left: '$$', right: '$$', display: true },
+                    { left: '$', right: '$', display: false },
+                    { left: '\\(', right: '\\)', display: false },
+                    { left: '\\[', right: '\\]', display: true },
+                ],
+                throwOnError: false,
+                strict: false
+            });
+        }
+    }, [post?.content]);
 
     useEffect(() => {
         const fetchpost = async () => {
@@ -35,7 +53,6 @@ const PostPage = () => {
 
         fetchpost();
     }, [slug]);
-
 
     if (loading) {
         return (
@@ -79,6 +96,7 @@ const PostPage = () => {
                 </div>
             </header>
             <div
+                ref={contentRef}
                 className="font-serif prose prose-lg lg:prose-xl max-w-none"
                 dangerouslySetInnerHTML={{ __html: post.content }}
             >
