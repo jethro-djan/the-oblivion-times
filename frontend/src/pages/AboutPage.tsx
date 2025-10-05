@@ -3,14 +3,14 @@ const AboutPage = () => {
         <>
             <article className="px-8 max-w-3xl mx-auto">
                 <header className="text-center mb-12">
-                    <h1 className="font-serif text-3xl md:text-4xl font-semibold leading-tight mb-6">About the Author</h1>
+                    <h1 className="font-serif text-3xl md:text-4xl font-semibold leading-tight mb-6">The Oblivion Times</h1>
+                    <p className="font-serif text-2xl italic text-primary-light mb-8 leading-relaxed">
+                        The refined thoughts of a wandering mind.
+                    </p>
                 </header>
                 <div 
                     className="font-serif prose prose-lg lg:prose-xl max-w-none"
                 >
-                    <p>
-                        <i>Learn about what this is all about.</i>
-                    </p>
                     <h3>About the publication</h3>
                     <p>
                         Oblivion Times is a digital salon for deep thinking and careful writing.
