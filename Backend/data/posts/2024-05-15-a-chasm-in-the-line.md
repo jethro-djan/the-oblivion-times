@@ -16,19 +16,19 @@ This post is about mathematics. Precisely, it is about lines. So feel free to sk
 In mathematics, it is often desirable to have a line or a curve that has no breaks in them. If you could imagine how important lines are in mathematics, then it is not a stretch of the imagination to accept that lines that don't break could be even more important. At this point, you might be reading and thinking, _that is a 'you' problem_. _How should lines be important to me a non-mathematician_? Well, lines are used to model the behaviour of things in the real world where [Surprise!] we both live. They have the ability to minimise focus on an object—because we won't even show that particular object—and tell us where that object has been, and where it is going instead. You can imagine a line to be the trajectory of a series of dots. Every dot represents the position of some arbitrary object, which we don't care about presently, at a particular instance in time. You can think on that for a second. Here are some instantly recognisable mathematical lines:
 
 <figure>
-<img src="assets/images/heart-beat-wave-logo-line-vector.jpg" alt="Wave of human heartbeat" title="Source: https://www.vecteezy.com/" />
+<img src="/assets/images/heart-beat-wave-logo-line-vector.jpg" class="" width="400" alt="Wave of human heartbeat" title="Source: https://www.vecteezy.com/" />
 <figcaption>Wave of human heartbeat. Not really how it technically looks like on an EKG machine but it is nice picture, right?</figcaption>
 </figure>
 
 <figure>
-<img src="/assets/images/719829945b6fab2fd3871fbffb7189d6.jpg" alt="Wave of light" title="Source: https://ar.inspiredpencil.com/pictures-2023/wavelength-of-light" />
+<img src="/assets/images/719829945b6fab2fd3871fbffb7189d6.jpg" width="400" alt="Wave of light" title="Source: https://ar.inspiredpencil.com/pictures-2023/wavelength-of-light" />
 <figcaption>Wave of light</figcaption>
 </figure>
 
 The beating of your heart and the way light particles actually look like is what we call a **wave**. When you throw a ball, or launch a rocket, mathematics and physics people just describe it as the motion of a projectile.
 
 <figure>
-<img src="/assets/images/1000_F_578019189_A9D5746MAH03KVcH2lkGiHI2rddgmkna.jpg" alt="Ball projectile" title="Source: https://stock.adobe.com" />
+<img src="/assets/images/1000_F_578019189_A9D5746MAH03KVcH2lkGiHI2rddgmkna.jpg" width="400" alt="Ball projectile" title="Source: https://stock.adobe.com" />
 <figcaption>Ball projectile</figcaption>
 </figure>
 
@@ -41,7 +41,7 @@ Of course the lines alone don't tell the whole story. Look at the picture of the
 In the sixteenth chapter of the gospel of Luke, Jesus told the Pharisees and those who were gathered a story. And you know his stories read exactly like how those European painters depicted the things he did: so unbelievably terse! I mean he wasn't trying to be an award-winning novelist but, still, the plots needed some work. [Dear reader, please do not take offence. I am only joking.] If you don't believe me, picture the story I am about to narrate.
 
 <figure>
-<img src="/assets/images/07b205e0802b9b87b4d1f5754036cb02.jpg" alt="Lazarus and the Rich Man by Jocopo Bassano" title="Source:https://pinterest.com" />
+<img src="/assets/images/07b205e0802b9b87b4d1f5754036cb02.jpg" width="400" alt="Lazarus and the Rich Man by Jocopo Bassano" title="Source:https://pinterest.com" />
 <figcaption>Lazarus and the Rich Man by Jocopo Bassano</figcaption>
 </figure>
 
@@ -52,14 +52,14 @@ So naturally (of course), the poor man goes to a place that is only described in
 ### Limits
 
 <figure>
-<img src="/assets/images/phpGgn5vP.png" alt="Graph of a smooth function" title="Source: https://chegg.com" />
+<img src="/assets/images/phpGgn5vP.png" width="400" alt="Graph of a smooth function" title="Source: https://chegg.com" />
 <figcaption>Graph of a smooth function</figcaption>
 </figure>
 
 In calculus, which is an aspect of mathematics, there is something called a **smooth function**. A smooth function can actually be represented with some graph of a line. So really, a graph is a pictorial representation of a function. We are saying that when you look at a graph that represents a smooth function, its line has no break in it. In addition to this, we would like the line to have no sharp turns (like the ones for heart wave). There are different kinds of breaks, or as mathematicians like to call them, **discontinuities**. But we would like to focus on the type pictured below:
 
 <figure>
-<img src="/assets/images/symmetry-of-the-reciprocal-function.png" alt="Infinite discontinuity for function y=f(x)=1/x" title="Source: https://storyofmathematics.com" />
+<img src="/assets/images/symmetry-of-the-reciprocal-function.png" awidth="400 "lt="Infinite discontinuity for function y=f(x)=1/x" title="Source: https://storyofmathematics.com" />
 <figcaption>Infinite discontinuity for function $y=f(x)=\frac{1}{x}$</figcaption>
 </figure>
 
@@ -72,14 +72,14 @@ $$\lim_{x\rightarrow p} f(x) = L$$
 Let us dismantle this mumbo-jumbo. First, picture a function $f$. It is simply a rule that takes an input value $x$ and spits an out output value $f(x)$.
 
 <figure>
-<img src="/assets/images/58mSg.png" alt="Function diagram" title="Source:https://tex.stackexchange.com" />
+<img src="/assets/images/58mSg.png" width="400" alt="Function diagram" title="Source:https://tex.stackexchange.com" />
 <figcaption>Function</figcaption>
 </figure>
 
 The space where the input values are found is called the **domain**. Likewise, the space where the output values are found is known as the **codomain**. Limits are really about how a function behaves near a particular input. Now picture the above function as some smooth function. Pick a particular point $p$. Suppose that $f(x)$ gets closer and closer to some functional value $L$ as $x$ moves closer and closer to $p$. Then $L$ is the limit of the function $f(x)$. Put another way, if two points are close to each other in the domain, it means they will be close once again when they are mapped by the function to the codomain. If you really think about it, this is what creates the 'illusion' of smoothness of a function! Practically, you ensure this criteria by looking at both directions of approaching the point in question. This is best illustrated with an example.
 
 <figure>
-<img src="/assets/images/how-to-find-a-limit-on-a-graph.png" alt="One-sided limits" title="Source:https://calcworkshop.com" />
+<img src="/assets/images/how-to-find-a-limit-on-a-graph.png" width="400" alt="One-sided limits" title="Source:https://calcworkshop.com" />
 <figcaption>Limits must coincide on both sides of the function</figcaption>
 </figure>
 
@@ -92,7 +92,7 @@ The limit on the left is called the **left hand limit** and that on the right is
 There is a caveat though. When we are speaking about limit of a function at a point, we don't actually care about the functional value at that point. Let us assume that $M=f(a)$, which is the output value of the function $f$ at the point $a$, does not exist. We _can_ still speak about the limit of the function at that particular point. We do not need the functional value to exist.
 
 <figure>
-<img src="/assets/images/sinx-over-x.svg" alt="Removable discontinuity" title="Source:https://www.sfu.ca/" />
+<img src="/assets/images/sinx-over-x.svg" width="400" alt="Removable discontinuity" title="Source:https://www.sfu.ca/" />
 <figcaption>Removable discontinuity</figcaption>
 </figure>
 

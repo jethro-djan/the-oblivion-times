@@ -1,6 +1,7 @@
 using Markdig;
 using Ganss.Xss;
-using Microsoft.Extensions.FileProviders;
+using System.Text.RegularExpressions;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,8 +24,10 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
+var backendUrl = builder.Configuration.GetValue<string>("BackendUrl") ?? "http://localhost:5099";
+
 var blogService = app.Services.GetRequiredService<BlogPostService>();
-var posts = blogService.LoadPosts("./data/posts");
+var posts = blogService.LoadPosts("./data/posts", backendUrl);
 
 if (app.Environment.IsDevelopment())
 {
@@ -33,12 +36,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors("AllowReactApp");
 app.UseStaticFiles();
-// app.UseStaticFiles(new StaticFileOptions 
-// {
-//     FileProvider = new PhysicalFileProvider(
-//         Path.Combine(builder.Environment.ContentRootPath, "assets")),
-//     RequestPath = "/assets"
-// });
 app.UseAuthorization();
 app.MapStaticAssets();
 
@@ -96,47 +93,76 @@ app.Run();
 record Post(string Id, string Slug, string Title, string Snippet, string Author, string Category, string Date, string Content);
 record PostSummary(string Id, string Slug, string Title, string Snippet, string Author, string Category, string Date);
 
-class BlogPostService 
+partial class BlogPostService 
 {
-    public List<Post> LoadPosts(string postsDirectory)
+
+    [GeneratedRegex(@"src=""/?assets/images/", RegexOptions.Compiled)]
+    private static partial Regex ImagePathRegex();
+
+    public List<Post> LoadPosts(string postsDirectory, string backendUrl)
     {
         var posts = new List<Post>();
         var markdownFiles = Directory.GetFiles(postsDirectory, "*.md");
 
-        foreach (var file in markdownFiles)
-        {
-            var content = File.ReadAllText(file);
-            var post = ParseMarkdownPost(content, Path.GetFileNameWithoutExtension(file));
-            posts.Add(post);
-        }
+        return markdownFiles 
+            .Select(file => ParseMarkdownPost(
+                File.ReadAllText(file, Encoding.UTF8),
+                Path.GetFileNameWithoutExtension(file),
+                backendUrl))
+            .OrderByDescending(p => p.Date)
+            .ToList();
 
-        return posts.OrderByDescending(p => p.Date).ToList();
     }
 
-    private Post ParseMarkdownPost(string content, string fileName)
+    private Post ParseMarkdownPost(string content, string fileName, string backendUrl)
     {
-        var parts = content.Split("---", 3, StringSplitOptions.RemoveEmptyEntries);
-        var frontmatter = parts[0].Trim();
-        var markdownContent = parts.Length > 1 ? parts[1].Trim() : "";
+        string frontmatter = "";
+        string markdownContent = content;
+
+        if (content.StartsWith("---"))
+        {
+            var endIndex = content.IndexOf("\n---", 3);
+            if (endIndex != -1)
+            {
+                frontmatter = content.Substring(3, endIndex - 3).Trim();
+                markdownContent = content.Substring(endIndex + 4).TrimStart();
+            }
+        }
 
         var deserialiser = new YamlDotNet.Serialization.Deserializer();
         var metadata = deserialiser
             .Deserialize<Dictionary<string, object>>(frontmatter);
 
+        markdownContent = ImagePathRegex().Replace(
+            markdownContent,
+            $@"src=""{backendUrl}/assets/images/"
+        );
+
         var pipeline = new MarkdownPipelineBuilder()
             .UseAdvancedExtensions()
-            // .DisableHtml()
+            .UseGridTables()
             .UsePipeTables()
-            .UseMathematics()
             .Build();
 
         var htmlContent = Markdown.ToHtml(markdownContent, pipeline);
 
         var sanitiser = new HtmlSanitizer();
+        // sanitiser.AllowedTags.Add("table");
+        // sanitiser.AllowedTags.Add("thead");
+        // sanitiser.AllowedTags.Add("tbody");
+        // sanitiser.AllowedTags.Add("tr");
+        // sanitiser.AllowedTags.Add("th");
+        // sanitiser.AllowedTags.Add("td");
+
         sanitiser.AllowedTags.Add("figure");
         sanitiser.AllowedTags.Add("figcaption");
+
         sanitiser.AllowedAttributes.Add("class");
         sanitiser.AllowedAttributes.Add("title");
+
+        // sanitiser.AllowedAttributes.Add("colspan");
+        // sanitiser.AllowedAttributes.Add("rowspan");
+        // sanitiser.AllowedAttributes.Add("scope");
 
         htmlContent = sanitiser.Sanitize(htmlContent);
 
@@ -158,3 +184,4 @@ class BlogPostService
 
     }
 }
+
